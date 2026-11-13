@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Joke of the Day · IEF</title>
+  <style>
+    :root { --eth-blue: #1F407A; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 1.5rem;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: #f4f6fa; color: #1b1b1b;
+    }
+    main {
+      width: 100%; max-width: 34rem; background: #fff; border-radius: 1rem;
+      padding: 2rem 1.5rem; box-shadow: 0 4px 24px rgba(31, 64, 122, .12);
+      text-align: center;
+    }
+    img.logo { width: min(16rem, 80%); height: auto; margin-bottom: 1.5rem; }
+    h1 { margin: 0 0 .25rem; font-size: 1.1rem; letter-spacing: .08em;
+         text-transform: uppercase; color: var(--eth-blue); }
+    time { display: block; margin-bottom: 1.5rem; color: #666; font-size: .9rem; }
+    #joke { font-size: 1.4rem; line-height: 1.45; margin: 0; }
+    footer { margin-top: 1.5rem; font-size: .75rem; color: #777; }
+  </style>
+</head>
+<body>
+  <main>
+    <img class="logo" src="ief_logo.svg" alt="IEF – Institute of Electromagnetic Fields">
+    <h1>Joke of the Day</h1>
+    <time id="date"></time>
+    <p id="joke">Loading…</p>
+    <footer>A new joke every day.</footer>
+  </main>
+  <script>
+    const FALLBACK = "Why did the page not load a joke? It was feeling a bit offline.";
+    fetch("joke.json?_=" + Date.now(), { cache: "no-store" })
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(d => {
+        document.getElementById("joke").textContent = d.joke;
+        const dt = new Date(d.date + "T12:00:00");
+        document.getElementById("date").textContent =
+          dt.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+      })
+      .catch(() => { document.getElementById("joke").textContent = FALLBACK; });
+  </script>
+</body>
+</html>
