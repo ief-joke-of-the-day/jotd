@@ -13,7 +13,7 @@ from zoneinfo import ZoneInfo
 
 HERE = Path(__file__).parent
 API_URL = "https://icanhazdadjoke.com/"
-USER_AGENT = "joke-of-the-day (github.com/ief-joke-of-the-day/joke-of-the-day)"
+USER_AGENT = "joke-of-the-day (github.com/ief-jotd/joke-of-the-day)"
 
 
 def fetch_from_api() -> str:
