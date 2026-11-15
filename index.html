@@ -4,120 +4,135 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>A Novel Framework for Daily Procrastination · nature procrastination</title>
+  <!-- Computer Modern (LaTeX look); falls back to a system serif if unavailable -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css">
   <style>
     :root {
+      --cm: "Computer Modern Serif", "Latin Modern Roman", "CMU Serif", Georgia, "Times New Roman", serif;
       --blue: #1565b0;
-      --ink: #0b0b0b;
-      --grey: #7b7d80;
-      --rule: #c9c9c9;
-      --serif: Georgia, "Times New Roman", Times, serif;
-      --sans: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
     }
     * { box-sizing: border-box; }
     body {
-      margin: 0; background: #fff; color: var(--ink);
-      font-family: var(--sans); line-height: 1.4;
+      margin: 0; background: #525659; /* PDF-viewer grey */
+      font-family: var(--cm); color: #111; line-height: 1.45;
+      padding: 1.25rem .6rem 3rem;
     }
-    article { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem 3rem; }
-
-    .bar { height: .7rem; background: var(--blue); margin: 0 -1.25rem 1.1rem; }
-    @media (min-width: 49rem) { .bar { margin: 0 0 1.1rem; } }
-
-    .masthead { font-family: var(--serif); font-size: clamp(1.9rem, 8vw, 3.2rem);
-                line-height: 1; letter-spacing: -.02em; margin-bottom: 1.6rem; }
-    .masthead .n1 { font-weight: 800; }
-    .masthead .n2 { font-weight: 400; color: var(--grey); }
-
-    .row { display: flex; justify-content: space-between; align-items: baseline;
-           gap: 1rem; flex-wrap: wrap; padding-bottom: .35rem; border-bottom: 1px solid var(--rule); }
-    .type { font-weight: 700; font-size: 1rem; }
-    .doi { color: var(--blue); font-size: .8rem; word-break: break-all; }
-
-    /* THE JOKE: the dominant element */
-    h1#joke {
-      font-family: var(--serif); font-weight: 800; letter-spacing: -.025em;
-      font-size: clamp(1.9rem, 8vw, 3.3rem); line-height: 1.08;
-      margin: 1rem 0 1.6rem; padding-bottom: 1.4rem; border-bottom: 1px solid var(--rule);
-      overflow-wrap: break-word;
+    .page {
+      max-width: 50rem; margin: 0 auto; background: #fff;
+      padding: 2.2rem clamp(1.1rem, 5vw, 3.6rem) 2rem;
+      box-shadow: 0 2px 14px rgba(0,0,0,.45);
+      font-size: clamp(.95rem, 2.6vw, 1.05rem);
     }
-    h1#joke .a { display: block; margin-top: .45em; }
 
-    .cols { display: grid; gap: 1.4rem; grid-template-columns: 1fr; font-size: .85rem; }
-    @media (min-width: 40rem) { .cols { grid-template-columns: 14rem 1fr; gap: 1.2rem; } }
-    ul.meta { list-style: none; margin: 0; padding: 0; }
-    ul.meta li { padding: .45rem 0; border-bottom: 1px solid var(--rule); font-weight: 500; }
-    ul.meta li:first-child { border-top: 1px solid var(--rule); }
-    ul.meta li.pub { font-family: var(--serif); font-weight: 400; }
-    ul.meta .chk { display: inline-block; width: 1.1em; height: 1.1em; border-radius: 50%;
-                   background: radial-gradient(circle at 50% 40%, #e53935 0 28%, #f2c230 30% 60%, #fff 62%);
-                   border: 1px solid #bbb; vertical-align: -.2em; margin-right: .35em; }
+    /* running header */
+    .runhead { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .3rem 1rem;
+               font-size: .72em; border-bottom: .5px solid #000; padding-bottom: .3rem; margin-bottom: 1.6rem; }
+    .runhead .j b { font-weight: 700; }
+    .runhead a { color: var(--blue); text-decoration: none; word-break: break-all; }
 
-    .abs .auth { margin: 0; padding: .45rem 0; border-top: 1px solid var(--rule);
-                 border-bottom: 1px solid var(--rule); font-weight: 700; }
-    .abs .auth sup { font-size: .6em; }
-    .abs .auth .mail { color: var(--grey); font-weight: 400; margin-left: .2em; }
-    .abs p.text { margin: .6rem 0 0; font-size: .95rem; line-height: 1.45; color: #222; }
+    h1.title { font-weight: 700; text-align: center; font-size: 1.75em; line-height: 1.2; margin: 0 0 .9rem; }
+    .authors { text-align: center; font-size: 1.05em; margin-bottom: .2rem; }
+    .affil { text-align: center; font-size: .8em; font-style: italic; margin-bottom: .2rem; }
+    .dates { text-align: center; font-size: .75em; color: #333; margin: .6rem 0 1.4rem; }
+
+    .abstract { font-size: .88em; text-align: justify; margin: 0 0 .5rem; hyphens: auto; }
+    .abstract b, .keywords b { font-style: italic; }
+    .keywords { font-size: .88em; margin: 0 0 1.6rem; }
+
+    h2 { font-size: 1.1em; font-weight: 700; margin: 1.4rem 0 .6rem; }
+    h2 .num { margin-right: .8em; }
+
+    /* THE JOKE: theorem environment, the dominant element */
+    .theorem {
+      margin: .4rem 0 1.4rem; padding: 1.2rem 1.3rem 1.1rem;
+      border: 1.5px solid #111; border-radius: 2px;
+    }
+    .theorem .lbl { font-weight: 700; font-size: .95em; margin-bottom: .5rem; display: block; }
+    .theorem .stmt { font-style: italic; font-size: clamp(1.5rem, 5.6vw, 2.25rem); line-height: 1.25;
+                     overflow-wrap: break-word; }
+    .proof { margin-top: 1rem; font-size: clamp(1.3rem, 4.8vw, 1.9rem); line-height: 1.3; }
+    .proof i { font-style: italic; margin-right: .35em; font-size: .7em; }
+    .qed { float: right; margin-left: .5em; }
+    .proof::after { content: ""; display: block; clear: both; }
+
+    .cols { column-gap: 2rem; text-align: justify; hyphens: auto; font-size: .92em; }
+    @media (min-width: 46rem) { .cols { columns: 2; } }
+    .cols h2 { break-after: avoid; margin-top: 0; }
+    .cols p { margin: 0 0 .7rem; text-indent: 1.2em; }
+    .cols p.first { text-indent: 0; }
+    ol.refs { margin: 0; padding-left: 0; list-style: none; font-size: .9em; }
+    ol.refs li { padding-left: 2.1em; text-indent: -2.1em; margin-bottom: .35rem; text-align: left; }
+    .folio { text-align: center; font-size: .8em; margin-top: 1.6rem; }
   </style>
 </head>
 <body>
-  <article>
-    <div class="bar"></div>
-    <div class="masthead"><span class="n1">nature</span> <span class="n2">procrastination</span></div>
-
-    <div class="row">
-      <span class="type">Article</span>
-      <span class="doi">https://doi.org/10.1038/joke-of-the-day</span>
+  <div class="page">
+    <div class="runhead">
+      <span class="j"><b>nature procrastination</b> · Vol. <span id="vol">1</span>, Article <span id="art">1</span></span>
+      <a href="./">https://doi.org/10.1038/joke-of-the-day</a>
     </div>
 
-    <h1 id="joke">Loading…</h1>
+    <h1 class="title">A Novel Framework for Daily Procrastination</h1>
+    <div class="authors">Gemini<sup>1,&#9993;</sup> et al.</div>
+    <div class="affil"><sup>1</sup>Institute for Advanced Coffee Break Studies</div>
+    <div class="dates">Received: 4 August 2026 · Accepted: 14 September 2026 · Published online: <span id="date">…</span></div>
+
+    <p class="abstract"><b>Abstract</b>—We present a daily joke-based mechanism designed to mitigate the acute
+      effects of academic burnout and cognitive fatigue in doctoral researchers. A single result is
+      published every 24&nbsp;h and is shown to be reproducible for exactly one day.</p>
+    <p class="keywords"><b>Index Terms</b>—humor, dad jokes, caffeine, burnout mitigation, peer review.</p>
+
+    <h2><span class="num">1</span>Main Result</h2>
+    <div class="theorem" id="thm">
+      <span class="lbl">Theorem 1 <span style="font-weight:400">(Joke of the Day)</span>.</span>
+      <div class="stmt" id="stmt">Loading…</div>
+      <div class="proof" id="proof"></div>
+    </div>
 
     <div class="cols">
-      <ul class="meta">
-        <li>Received: 4 August 2026</li>
-        <li>Accepted: 14 September 2026</li>
-        <li class="pub">Published online: <span id="date">…</span></li>
-        <li><span class="chk"></span>Check for updates</li>
-      </ul>
-      <div class="abs">
-        <p class="auth">Gemini et al., 2026.<sup>b</sup><span class="mail">&#9993;</span></p>
-        <p class="text">We present a daily joke-based mechanism designed to mitigate the acute effects of
-          academic burnout and cognitive fatigue in doctoral researchers.</p>
-      </div>
+      <h2><span class="num">2</span>Discussion</h2>
+      <p class="first">Theorem&nbsp;1 was obtained under standard laboratory conditions (one coffee, no
+        deadlines in sight). Reviewers noted that the result is novel only for a single day; a new result
+        will appear tomorrow, rendering this paper obsolete in under 24&nbsp;h.</p>
+      <p>Limitations include a strong dad-joke bias in the data source&nbsp;[1] and a sample size of one.</p>
+
+      <h2><span class="num">3</span>References</h2>
+      <ol class="refs">
+        <li>[1] icanhazdadjoke.com, “Dad Joke API,” online, accessed daily.</li>
+        <li>[2] Anonymous, “On the necessity of coffee,” <i>Proc. Lab Kitchen</i>, vol. ∞, 2026.</li>
+        <li>[3] Reviewer&nbsp;2, “Please cite my work,” private communication.</li>
+      </ol>
     </div>
-  </article>
+
+    <div class="folio">1</div>
+  </div>
 
   <script>
-    const FALLBACK = "Why did the page not load a joke? It was feeling a bit offline.";
+    const FALLBACK = "Why did the paper not load? It was still under review.";
+    const fmt = d => d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
 
-    function renderJoke(text) {
-      const h = document.getElementById("joke");
-      h.textContent = "";
-      // Q&A jokes: question first, answer on its own line.
-      const i = text.indexOf("? ");
-      if (i > 0 && i < text.length - 2) {
-        h.append(text.slice(0, i + 1));
-        const a = document.createElement("span");
-        a.className = "a";
-        a.textContent = text.slice(i + 2);
-        h.append(a);
-      } else {
-        h.textContent = text;
-      }
+    function render(joke, date) {
+      const stmt = document.getElementById("stmt"), proof = document.getElementById("proof");
+      const i = joke.indexOf("? ");
+      let setup = joke, punch = null;
+      if (i > 0 && i < joke.length - 2) { setup = joke.slice(0, i + 1); punch = joke.slice(i + 2); }
+      stmt.textContent = setup;
+      proof.innerHTML = "";
+      const p = document.createElement("i"); p.textContent = "Proof.";
+      proof.append(p, punch ?? "Left as an exercise to the reader.");
+      const q = document.createElement("span"); q.className = "qed"; q.textContent = "∎";
+      proof.append(q);
+
+      document.getElementById("date").textContent = fmt(date);
+      document.getElementById("vol").textContent = date.getFullYear() - 2025;
+      const start = new Date(date.getFullYear(), 0, 0);
+      document.getElementById("art").textContent = Math.floor((date - start) / 864e5);
     }
 
     fetch("joke.json?_=" + Date.now(), { cache: "no-store" })
       .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(d => {
-        renderJoke(d.joke);
-        const dt = new Date(d.date + "T12:00:00");
-        document.getElementById("date").textContent =
-          dt.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
-      })
-      .catch(() => {
-        renderJoke(FALLBACK);
-        document.getElementById("date").textContent =
-          new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
-      });
+      .then(d => render(d.joke, new Date(d.date + "T12:00:00")))
+      .catch(() => render(FALLBACK, new Date()));
   </script>
 </body>
 </html>
