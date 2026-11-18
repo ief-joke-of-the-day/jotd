@@ -9,8 +9,6 @@
     :root {
       --cm: "Computer Modern Serif", "Latin Modern Roman", "CMU Serif", Georgia, "Times New Roman", serif;
       --ink: #111;
-      --bar: #1a1a1a;
-      --bar-muted: #555;
     }
     * { box-sizing: border-box; }
     body {
@@ -22,24 +20,27 @@
     }
     .page {
       max-width: 48rem;
+      aspect-ratio: 210 / 297;
       margin: 0 auto;
       background: #fff;
-      padding: 2.2rem clamp(1.2rem, 5vw, 3.6rem) 2.2rem;
+      padding: 2.2rem clamp(1.2rem, 5vw, 3.6rem) 1.8rem;
       box-shadow: 0 2px 14px rgba(0,0,0,.45);
+      display: flex;
+      flex-direction: column;
     }
 
     .date-line {
       text-align: right;
       font-size: .78rem;
       color: #666;
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.6rem;
     }
 
     /* THE JOKE as the paper title */
     h1#joke {
       font-weight: 700;
       text-align: center;
-      font-size: clamp(1.75rem, 5.2vw, 2.6rem);
+      font-size: clamp(1.55rem, 4.8vw, 2.55rem);
       line-height: 1.18;
       margin: 0 0 1.4rem;
       overflow-wrap: break-word;
@@ -52,15 +53,17 @@
       font-size: .85em;
     }
 
-    /* Simple placeholder bars */
+    /* Only two bar types: thick black (authors & section titles) and thin grey (everything else) */
     .b {
       display: block;
-      height: .5rem;
-      background: var(--bar);
+      height: .55rem;
+      background: #111;
       border-radius: 1px;
     }
-    .b.sm { height: .38rem; background: var(--bar-muted); }
-    .b.hd { height: .62rem; margin-bottom: .55rem; }
+    .b.thin {
+      height: .34rem;
+      background: #777;
+    }
 
     /* Author rows */
     .authors {
@@ -68,7 +71,7 @@
       flex-direction: column;
       align-items: center;
       gap: .45rem;
-      margin-bottom: 2rem;
+      margin-bottom: 2.2rem;
     }
     .authors .row {
       display: flex;
@@ -83,17 +86,19 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1.4rem clamp(1.1rem, 4vw, 2.4rem);
+      flex: 1;
     }
     .col {
       display: flex;
       flex-direction: column;
-      gap: 1.1rem;
+      gap: 1.15rem;
     }
     .lines {
       display: flex;
       flex-direction: column;
       gap: .42rem;
     }
+    .hd { margin-bottom: .55rem; }
 
     /* Abstract in left column */
     .abstract {
@@ -101,18 +106,13 @@
       border-top: 1px solid #d0d0d0;
       border-bottom: 1px solid #d0d0d0;
     }
-    .abstract .label {
-      width: 4.2rem;
-      height: .5rem;
-      background: var(--bar);
-      margin-bottom: .55rem;
-    }
+    .abstract .hd { margin-bottom: .5rem; }
 
     .folio {
       text-align: center;
       font-size: .8rem;
       color: #555;
-      margin-top: 2rem;
+      margin-top: 1.6rem;
     }
   </style>
 </head>
@@ -122,7 +122,7 @@
 
     <h1 id="joke">Loading…</h1>
 
-    <!-- Authors & affiliations -->
+    <!-- Authors (thick black) & affiliations (thin grey) -->
     <div class="authors" aria-hidden="true">
       <div class="row">
         <span class="b" style="width: 6rem"></span>
@@ -130,8 +130,8 @@
         <span class="b" style="width: 6.5rem"></span>
       </div>
       <div class="row">
-        <span class="b sm" style="width: 10.5rem"></span>
-        <span class="b sm" style="width: 9rem"></span>
+        <span class="b thin" style="width: 10.5rem"></span>
+        <span class="b thin" style="width: 9rem"></span>
       </div>
     </div>
 
@@ -140,29 +140,37 @@
       <div class="col">
         <!-- Abstract in left column -->
         <div class="abstract">
-          <div class="label"></div>
+          <span class="b hd" style="width: 4.2rem"></span>
           <div class="lines">
-            <span class="b sm" style="width: 100%"></span>
-            <span class="b sm" style="width: 96%"></span>
-            <span class="b sm" style="width: 98%"></span>
-            <span class="b sm" style="width: 72%"></span>
+            <span class="b thin" style="width: 100%"></span>
+            <span class="b thin" style="width: 96%"></span>
+            <span class="b thin" style="width: 98%"></span>
+            <span class="b thin" style="width: 72%"></span>
           </div>
         </div>
 
         <div>
           <span class="b hd" style="width: 55%"></span>
           <div class="lines">
-            <span class="b" style="width: 100%"></span>
-            <span class="b" style="width: 95%"></span>
-            <span class="b" style="width: 100%"></span>
-            <span class="b" style="width: 68%"></span>
+            <span class="b thin" style="width: 100%"></span>
+            <span class="b thin" style="width: 95%"></span>
+            <span class="b thin" style="width: 100%"></span>
+            <span class="b thin" style="width: 92%"></span>
+            <span class="b thin" style="width: 68%"></span>
           </div>
         </div>
 
         <div class="lines">
-          <span class="b" style="width: 100%"></span>
-          <span class="b" style="width: 97%"></span>
-          <span class="b" style="width: 54%"></span>
+          <span class="b thin" style="width: 100%"></span>
+          <span class="b thin" style="width: 97%"></span>
+          <span class="b thin" style="width: 94%"></span>
+          <span class="b thin" style="width: 54%"></span>
+        </div>
+
+        <div class="lines">
+          <span class="b thin" style="width: 100%"></span>
+          <span class="b thin" style="width: 91%"></span>
+          <span class="b thin" style="width: 76%"></span>
         </div>
       </div>
 
@@ -170,27 +178,35 @@
         <div>
           <span class="b hd" style="width: 50%"></span>
           <div class="lines">
-            <span class="b" style="width: 100%"></span>
-            <span class="b" style="width: 96%"></span>
-            <span class="b" style="width: 100%"></span>
-            <span class="b" style="width: 88%"></span>
+            <span class="b thin" style="width: 100%"></span>
+            <span class="b thin" style="width: 96%"></span>
+            <span class="b thin" style="width: 100%"></span>
+            <span class="b thin" style="width: 88%"></span>
           </div>
         </div>
 
         <div class="lines">
-          <span class="b" style="width: 100%"></span>
-          <span class="b" style="width: 94%"></span>
-          <span class="b" style="width: 100%"></span>
-          <span class="b" style="width: 60%"></span>
+          <span class="b thin" style="width: 100%"></span>
+          <span class="b thin" style="width: 94%"></span>
+          <span class="b thin" style="width: 100%"></span>
+          <span class="b thin" style="width: 97%"></span>
+          <span class="b thin" style="width: 60%"></span>
         </div>
 
         <div>
           <span class="b hd" style="width: 45%"></span>
           <div class="lines">
-            <span class="b sm" style="width: 95%"></span>
-            <span class="b sm" style="width: 82%"></span>
-            <span class="b sm" style="width: 90%"></span>
+            <span class="b thin" style="width: 95%"></span>
+            <span class="b thin" style="width: 82%"></span>
+            <span class="b thin" style="width: 90%"></span>
+            <span class="b thin" style="width: 70%"></span>
           </div>
+        </div>
+
+        <div class="lines">
+          <span class="b thin" style="width: 100%"></span>
+          <span class="b thin" style="width: 88%"></span>
+          <span class="b thin" style="width: 52%"></span>
         </div>
       </div>
     </div>
