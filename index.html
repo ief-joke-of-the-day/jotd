@@ -165,7 +165,8 @@
       L.append(mk("b sec-title", "32%"));
       const absLines = document.createElement("div");
       absLines.className = "lines after-abstract";
-      for (const w of ["100%", "100%", "100%", "100%", "100%", "100%", "100%", "68%"]) {
+      const absWidths = Array(15).fill("100%").concat("68%");
+      for (const w of absWidths) {
         absLines.append(mk("b thin", w));
       }
       L.append(absLines);
