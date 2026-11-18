@@ -216,9 +216,22 @@
 
   <script>
     const FALLBACK = "Why did the paper not load? It was still under review.";
-    const fmt = d => d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+    const zurichToday = () => new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Europe/Zurich", year: "numeric", month: "2-digit", day: "2-digit"
+    }).format(new Date());
+    const fmt = dateStr => new Date(dateStr + "T12:00:00").toLocaleDateString("en-GB", {
+      day: "numeric", month: "long", year: "numeric"
+    });
 
-    function render(joke, date) {
+    function dateSeed(dateStr) {
+      let h = 0x811c9dc5;
+      for (let i = 0; i < dateStr.length; i++) {
+        h = Math.imul(h ^ dateStr.charCodeAt(i), 0x01000193) >>> 0;
+      }
+      return h;
+    }
+
+    function render(joke, dateStr) {
       const h = document.getElementById("joke");
       h.textContent = "";
       const i = joke.indexOf("? ");
@@ -231,13 +244,42 @@
       } else {
         h.textContent = joke;
       }
-      document.getElementById("date").textContent = fmt(date);
+      document.getElementById("date").textContent = fmt(dateStr);
     }
 
-    fetch("joke.json?_=" + Date.now(), { cache: "no-store" })
-      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(d => render(d.joke, new Date(d.date + "T12:00:00")))
-      .catch(() => render(FALLBACK, new Date()));
+    async function fetchJokeForDate(dateStr) {
+      const hdrs = { Accept: "application/json" };
+      const r1 = await fetch("https://icanhazdadjoke.com/search?limit=1&page=1", { headers: hdrs });
+      if (!r1.ok) throw new Error(r1.status);
+      const m = await r1.json();
+      const page = (dateSeed(dateStr) % m.total_jokes) + 1;
+      if (page === 1 && m.results?.[0]?.joke) return m.results[0].joke;
+      const r2 = await fetch(`https://icanhazdadjoke.com/search?limit=1&page=${page}`, { headers: hdrs });
+      if (!r2.ok) throw new Error(r2.status);
+      const d2 = await r2.json();
+      return d2.results[0].joke;
+    }
+
+    (async () => {
+      const today = zurichToday();
+      try {
+        const r = await fetch("joke.json?_=" + Date.now(), { cache: "no-store" });
+        if (r.ok) {
+          const d = await r.json();
+          if (d.date === today && d.joke) { render(d.joke, today); return; }
+        }
+      } catch {}
+      try {
+        render(await fetchJokeForDate(today), today);
+      } catch {
+        try {
+          const fb = await fetch("fallback_jokes.json").then(r => r.json());
+          render(fb[dateSeed(today) % fb.length], today);
+        } catch {
+          render(FALLBACK, today);
+        }
+      }
+    })();
   </script>
 </body>
 </html>
