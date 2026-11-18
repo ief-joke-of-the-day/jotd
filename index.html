@@ -3,12 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Joke of the Day · nature procrastination</title>
+  <title>Joke of the Day</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css">
   <style>
     :root {
       --cm: "Computer Modern Serif", "Latin Modern Roman", "CMU Serif", Georgia, "Times New Roman", serif;
-      --blue: #1565b0;
       --ink: #111;
       --bar: #1a1a1a;
       --bar-muted: #555;
@@ -22,32 +21,25 @@
       padding: 1.25rem .6rem 3rem;
     }
     .page {
-      max-width: 50rem;
+      max-width: 48rem;
       margin: 0 auto;
       background: #fff;
       padding: 2.2rem clamp(1.2rem, 5vw, 3.6rem) 2.2rem;
       box-shadow: 0 2px 14px rgba(0,0,0,.45);
     }
 
-    /* Running header */
-    .runhead {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: .3rem 1rem;
+    .date-line {
+      text-align: right;
       font-size: .78rem;
-      border-bottom: 1px solid #111;
-      padding-bottom: .35rem;
-      margin-bottom: 1.8rem;
+      color: #666;
+      margin-bottom: 1.4rem;
     }
-    .runhead .j b { font-weight: 700; }
-    .runhead .meta { color: var(--blue); }
 
     /* THE JOKE as the paper title */
     h1#joke {
       font-weight: 700;
       text-align: center;
-      font-size: clamp(1.75rem, 5.2vw, 2.65rem);
+      font-size: clamp(1.75rem, 5.2vw, 2.6rem);
       line-height: 1.18;
       margin: 0 0 1.4rem;
       overflow-wrap: break-word;
@@ -60,23 +52,23 @@
       font-size: .85em;
     }
 
-    /* Reusable text-placeholder bars */
+    /* Simple placeholder bars */
     .b {
       display: block;
-      height: .48rem;
+      height: .5rem;
       background: var(--bar);
       border-radius: 1px;
     }
-    .b.sm { height: .36rem; background: var(--bar-muted); }
+    .b.sm { height: .38rem; background: var(--bar-muted); }
     .b.hd { height: .62rem; margin-bottom: .55rem; }
 
-    /* Author & affiliation rows */
+    /* Author rows */
     .authors {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: .45rem;
-      margin-bottom: 1.6rem;
+      margin-bottom: 2rem;
     }
     .authors .row {
       display: flex;
@@ -86,216 +78,118 @@
       width: 100%;
     }
 
-    /* Abstract block */
-    .abstract {
-      max-width: 38rem;
-      margin: 0 auto 1.8rem;
-      padding: .75rem 0;
-      border-top: 1px solid #d0d0d0;
-      border-bottom: 1px solid #d0d0d0;
-    }
-    .abstract .label {
-      width: 4.5rem;
-      height: .5rem;
-      background: var(--bar);
-      margin-bottom: .55rem;
-    }
-    .lines {
-      display: flex;
-      flex-direction: column;
-      gap: .38rem;
-    }
-
     /* Two-column paper body */
     .cols {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.4rem clamp(1rem, 4vw, 2.2rem);
+      gap: 1.4rem clamp(1.1rem, 4vw, 2.4rem);
     }
     .col {
       display: flex;
       flex-direction: column;
-      gap: .95rem;
+      gap: 1.1rem;
     }
-    .p-indent .b:first-child {
-      margin-left: 1.1rem;
-      width: calc(100% - 1.1rem);
-    }
-
-    /* Wireframe figure box */
-    .fig {
-      border: 1.2px solid var(--bar);
-      padding: .55rem;
-      display: flex;
-      flex-direction: column;
-      gap: .4rem;
-    }
-    .fig-box {
-      height: 4.5rem;
-      border: 1px dashed var(--bar-muted);
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-around;
-      padding: .5rem .6rem 0;
-      gap: .35rem;
-    }
-    .fig-box span {
-      flex: 1;
-      background: var(--bar);
-    }
-
-    /* References-like short lines */
-    .refs {
+    .lines {
       display: flex;
       flex-direction: column;
       gap: .42rem;
     }
-    .ref-item {
-      display: flex;
-      gap: .4rem;
-      align-items: flex-start;
+
+    /* Abstract in left column */
+    .abstract {
+      padding: .65rem 0;
+      border-top: 1px solid #d0d0d0;
+      border-bottom: 1px solid #d0d0d0;
     }
-    .ref-item .dot {
-      width: .65rem;
-      height: .36rem;
+    .abstract .label {
+      width: 4.2rem;
+      height: .5rem;
       background: var(--bar);
-      flex-shrink: 0;
-      margin-top: .02rem;
-    }
-    .ref-item .ref-lines {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: .28rem;
+      margin-bottom: .55rem;
     }
 
     .folio {
       text-align: center;
       font-size: .8rem;
-      color: #444;
-      margin-top: 1.8rem;
+      color: #555;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <div class="runhead">
-      <span class="j"><b>nature procrastination</b> · Vol. <span id="vol">1</span>, Art. <span id="art">1</span></span>
-      <span class="meta" id="date">…</span>
-    </div>
+    <div class="date-line" id="date">…</div>
 
     <h1 id="joke">Loading…</h1>
 
     <!-- Authors & affiliations -->
     <div class="authors" aria-hidden="true">
       <div class="row">
-        <span class="b" style="width: 6.2rem"></span>
-        <span class="b" style="width: 5.4rem"></span>
-        <span class="b" style="width: 6.8rem"></span>
+        <span class="b" style="width: 6rem"></span>
+        <span class="b" style="width: 5.5rem"></span>
+        <span class="b" style="width: 6.5rem"></span>
       </div>
       <div class="row">
-        <span class="b sm" style="width: 11rem"></span>
-        <span class="b sm" style="width: 9.5rem"></span>
-      </div>
-    </div>
-
-    <!-- Abstract -->
-    <div class="abstract" aria-hidden="true">
-      <div class="label"></div>
-      <div class="lines">
-        <span class="b sm" style="width: 100%"></span>
-        <span class="b sm" style="width: 97%"></span>
-        <span class="b sm" style="width: 99%"></span>
-        <span class="b sm" style="width: 68%"></span>
+        <span class="b sm" style="width: 10.5rem"></span>
+        <span class="b sm" style="width: 9rem"></span>
       </div>
     </div>
 
     <!-- Two-column paper body -->
     <div class="cols" aria-hidden="true">
       <div class="col">
+        <!-- Abstract in left column -->
+        <div class="abstract">
+          <div class="label"></div>
+          <div class="lines">
+            <span class="b sm" style="width: 100%"></span>
+            <span class="b sm" style="width: 96%"></span>
+            <span class="b sm" style="width: 98%"></span>
+            <span class="b sm" style="width: 72%"></span>
+          </div>
+        </div>
+
         <div>
-          <span class="b hd" style="width: 52%"></span>
+          <span class="b hd" style="width: 55%"></span>
           <div class="lines">
             <span class="b" style="width: 100%"></span>
-            <span class="b" style="width: 96%"></span>
+            <span class="b" style="width: 95%"></span>
             <span class="b" style="width: 100%"></span>
-            <span class="b" style="width: 92%"></span>
-            <span class="b" style="width: 74%"></span>
+            <span class="b" style="width: 68%"></span>
           </div>
         </div>
 
-        <div class="lines p-indent">
-          <span class="b"></span>
-          <span class="b" style="width: 98%"></span>
+        <div class="lines">
           <span class="b" style="width: 100%"></span>
-          <span class="b" style="width: 89%"></span>
-          <span class="b" style="width: 46%"></span>
-        </div>
-
-        <div class="fig">
-          <div class="fig-box">
-            <span style="height: 38%"></span>
-            <span style="height: 68%"></span>
-            <span style="height: 52%"></span>
-            <span style="height: 86%"></span>
-            <span style="height: 61%"></span>
-          </div>
-          <span class="b sm" style="width: 82%"></span>
-          <span class="b sm" style="width: 54%"></span>
-        </div>
-
-        <div class="lines p-indent">
-          <span class="b"></span>
-          <span class="b" style="width: 95%"></span>
-          <span class="b" style="width: 100%"></span>
-          <span class="b" style="width: 63%"></span>
+          <span class="b" style="width: 97%"></span>
+          <span class="b" style="width: 54%"></span>
         </div>
       </div>
 
       <div class="col">
         <div>
-          <span class="b hd" style="width: 60%"></span>
+          <span class="b hd" style="width: 50%"></span>
           <div class="lines">
             <span class="b" style="width: 100%"></span>
-            <span class="b" style="width: 94%"></span>
-            <span class="b" style="width: 99%"></span>
-            <span class="b" style="width: 85%"></span>
+            <span class="b" style="width: 96%"></span>
+            <span class="b" style="width: 100%"></span>
+            <span class="b" style="width: 88%"></span>
           </div>
         </div>
 
-        <div class="lines p-indent">
-          <span class="b"></span>
-          <span class="b" style="width: 97%"></span>
+        <div class="lines">
           <span class="b" style="width: 100%"></span>
-          <span class="b" style="width: 93%"></span>
+          <span class="b" style="width: 94%"></span>
           <span class="b" style="width: 100%"></span>
-          <span class="b" style="width: 58%"></span>
+          <span class="b" style="width: 60%"></span>
         </div>
 
         <div>
-          <span class="b hd" style="width: 44%"></span>
-          <div class="refs">
-            <div class="ref-item">
-              <span class="dot"></span>
-              <div class="ref-lines">
-                <span class="b sm" style="width: 96%"></span>
-                <span class="b sm" style="width: 62%"></span>
-              </div>
-            </div>
-            <div class="ref-item">
-              <span class="dot"></span>
-              <div class="ref-lines">
-                <span class="b sm" style="width: 92%"></span>
-                <span class="b sm" style="width: 78%"></span>
-              </div>
-            </div>
-            <div class="ref-item">
-              <span class="dot"></span>
-              <div class="ref-lines">
-                <span class="b sm" style="width: 88%"></span>
-                <span class="b sm" style="width: 45%"></span>
-              </div>
-            </div>
+          <span class="b hd" style="width: 45%"></span>
+          <div class="lines">
+            <span class="b sm" style="width: 95%"></span>
+            <span class="b sm" style="width: 82%"></span>
+            <span class="b sm" style="width: 90%"></span>
           </div>
         </div>
       </div>
@@ -321,11 +215,7 @@
       } else {
         h.textContent = joke;
       }
-
       document.getElementById("date").textContent = fmt(date);
-      document.getElementById("vol").textContent = date.getFullYear() - 2025;
-      const start = new Date(date.getFullYear(), 0, 0);
-      document.getElementById("art").textContent = Math.floor((date - start) / 864e5);
     }
 
     fetch("joke.json?_=" + Date.now(), { cache: "no-store" })
