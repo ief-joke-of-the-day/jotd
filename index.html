@@ -86,7 +86,7 @@
     .cols {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: clamp(.8rem, 3vw, 2.2rem);
+      gap: clamp(.8rem, 2.8vw, 2rem);
       flex: 1;
       min-height: 0;
       overflow: hidden;
@@ -94,23 +94,23 @@
     .col {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      gap: clamp(.45rem, 1.4vw, .95rem);
+      gap: clamp(.32rem, .85vw, .58rem);
     }
     .lines {
       display: flex;
       flex-direction: column;
-      gap: clamp(.22rem, .65vw, .4rem);
+      gap: clamp(.14rem, .38vw, .24rem);
     }
-    .hd { margin-bottom: clamp(.25rem, .8vw, .5rem); }
+    .hd { margin-top: clamp(.15rem, .4vw, .3rem); margin-bottom: clamp(.18rem, .45vw, .32rem); }
 
     /* Abstract in left column */
     .abstract {
-      padding: clamp(.35rem, 1vw, .6rem) 0;
+      padding: clamp(.25rem, .7vw, .45rem) 0;
       border-top: 1px solid #d0d0d0;
       border-bottom: 1px solid #d0d0d0;
+      margin-bottom: clamp(.1rem, .3vw, .2rem);
     }
-    .abstract .hd { margin-bottom: clamp(.25rem, .7vw, .45rem); }
+    .abstract .hd { margin-top: 0; margin-bottom: clamp(.18rem, .45vw, .3rem); }
 
     .folio {
       text-align: center;
@@ -139,131 +139,84 @@
       </div>
     </div>
 
-    <!-- Two-column paper body -->
+    <!-- Two-column paper body (densely packed; overflows cleanly at bottom margin) -->
     <div class="cols" aria-hidden="true">
-      <div class="col">
-        <!-- Abstract in left column -->
+      <div class="col" id="col-left">
         <div class="abstract">
           <span class="b hd" style="width: 4.2rem"></span>
           <div class="lines">
             <span class="b thin" style="width: 100%"></span>
             <span class="b thin" style="width: 96%"></span>
             <span class="b thin" style="width: 98%"></span>
+            <span class="b thin" style="width: 94%"></span>
             <span class="b thin" style="width: 72%"></span>
           </div>
         </div>
-
-        <div>
-          <span class="b hd" style="width: 55%"></span>
-          <div class="lines">
-            <span class="b thin" style="width: 100%"></span>
-            <span class="b thin" style="width: 95%"></span>
-            <span class="b thin" style="width: 100%"></span>
-            <span class="b thin" style="width: 92%"></span>
-            <span class="b thin" style="width: 68%"></span>
-          </div>
-        </div>
-
-        <div class="lines">
-          <span class="b thin" style="width: 100%"></span>
-          <span class="b thin" style="width: 97%"></span>
-          <span class="b thin" style="width: 94%"></span>
-          <span class="b thin" style="width: 54%"></span>
-        </div>
-
-        <div class="lines">
-          <span class="b thin" style="width: 100%"></span>
-          <span class="b thin" style="width: 91%"></span>
-          <span class="b thin" style="width: 98%"></span>
-          <span class="b thin" style="width: 76%"></span>
-        </div>
-
-        <div>
-          <span class="b hd" style="width: 48%"></span>
-          <div class="lines">
-            <span class="b thin" style="width: 100%"></span>
-            <span class="b thin" style="width: 94%"></span>
-            <span class="b thin" style="width: 99%"></span>
-            <span class="b thin" style="width: 92%"></span>
-            <span class="b thin" style="width: 64%"></span>
-          </div>
-        </div>
-
-        <div class="lines">
-          <span class="b thin" style="width: 100%"></span>
-          <span class="b thin" style="width: 96%"></span>
-          <span class="b thin" style="width: 89%"></span>
-          <span class="b thin" style="width: 100%"></span>
-          <span class="b thin" style="width: 48%"></span>
-        </div>
-
-        <div class="lines">
-          <span class="b thin" style="width: 100%"></span>
-          <span class="b thin" style="width: 93%"></span>
-          <span class="b thin" style="width: 72%"></span>
-        </div>
       </div>
-
-      <div class="col">
-        <div>
-          <span class="b hd" style="width: 50%"></span>
-          <div class="lines">
-            <span class="b thin" style="width: 100%"></span>
-            <span class="b thin" style="width: 96%"></span>
-            <span class="b thin" style="width: 100%"></span>
-            <span class="b thin" style="width: 88%"></span>
-          </div>
-        </div>
-
-        <div class="lines">
-          <span class="b thin" style="width: 100%"></span>
-          <span class="b thin" style="width: 94%"></span>
-          <span class="b thin" style="width: 100%"></span>
-          <span class="b thin" style="width: 97%"></span>
-          <span class="b thin" style="width: 60%"></span>
-        </div>
-
-        <div class="lines">
-          <span class="b thin" style="width: 100%"></span>
-          <span class="b thin" style="width: 92%"></span>
-          <span class="b thin" style="width: 98%"></span>
-          <span class="b thin" style="width: 78%"></span>
-        </div>
-
-        <div>
-          <span class="b hd" style="width: 45%"></span>
-          <div class="lines">
-            <span class="b thin" style="width: 95%"></span>
-            <span class="b thin" style="width: 82%"></span>
-            <span class="b thin" style="width: 99%"></span>
-            <span class="b thin" style="width: 70%"></span>
-          </div>
-        </div>
-
-        <div class="lines">
-          <span class="b thin" style="width: 100%"></span>
-          <span class="b thin" style="width: 88%"></span>
-          <span class="b thin" style="width: 96%"></span>
-          <span class="b thin" style="width: 52%"></span>
-        </div>
-
-        <div>
-          <span class="b hd" style="width: 40%"></span>
-          <div class="lines">
-            <span class="b thin" style="width: 96%"></span>
-            <span class="b thin" style="width: 74%"></span>
-            <span class="b thin" style="width: 92%"></span>
-            <span class="b thin" style="width: 66%"></span>
-            <span class="b thin" style="width: 85%"></span>
-          </div>
-        </div>
-      </div>
+      <div class="col" id="col-right"></div>
     </div>
 
     <div class="folio">1</div>
   </div>
 
   <script>
+    // Populate dense two-column paper bars
+    (() => {
+      const mk = (cls, w) => {
+        const s = document.createElement("span");
+        s.className = cls;
+        s.style.width = w;
+        return s;
+      };
+      const addSection = (col, headingW, paras) => {
+        if (headingW) col.append(mk("b hd", headingW));
+        for (const widths of paras) {
+          const box = document.createElement("div");
+          box.className = "lines";
+          for (const w of widths) box.append(mk("b thin", w));
+          col.append(box);
+        }
+      };
+
+      const L = document.getElementById("col-left");
+      addSection(L, "52%", [
+        ["100%", "96%", "100%", "93%", "98%", "64%"],
+        ["100%", "95%", "99%", "92%", "100%", "78%", "45%"],
+      ]);
+      addSection(L, "44%", [
+        ["100%", "97%", "94%", "100%", "91%", "68%"],
+        ["100%", "96%", "99%", "88%", "52%"],
+        ["100%", "95%", "98%", "93%", "74%"],
+      ]);
+      addSection(L, "56%", [
+        ["100%", "94%", "99%", "96%", "60%"],
+        ["100%", "97%", "92%", "84%"],
+        ["100%", "95%", "98%", "90%", "54%"],
+      ]);
+      addSection(L, "46%", [
+        ["100%", "96%", "93%", "99%", "72%"],
+        ["100%", "94%", "97%", "64%"],
+      ]);
+
+      const R = document.getElementById("col-right");
+      addSection(R, "48%", [
+        ["100%", "95%", "100%", "93%", "97%", "70%"],
+        ["100%", "98%", "94%", "100%", "89%", "56%"],
+      ]);
+      addSection(R, "54%", [
+        ["100%", "96%", "99%", "91%", "100%", "82%", "48%"],
+        ["100%", "94%", "97%", "95%", "66%"],
+      ]);
+      addSection(R, "42%", [
+        ["100%", "97%", "93%", "99%", "62%"],
+        ["100%", "95%", "98%", "86%"],
+      ]);
+      addSection(R, "38%", [
+        ["96%", "78%", "94%", "64%", "98%", "72%", "90%", "58%"],
+        ["95%", "82%", "97%", "68%", "91%", "52%"],
+      ]);
+    })();
+
     const FALLBACK = "Why did the paper not load? It was still under review.";
     const zurichToday = () => new Intl.DateTimeFormat("en-CA", {
       timeZone: "Europe/Zurich", year: "numeric", month: "2-digit", day: "2-digit"
